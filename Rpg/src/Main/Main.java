@@ -8,6 +8,10 @@ import javax.swing.*;
 import Model.Game;
 import View.View;
 
+/** class main qui instancie game et vieuw
+@param string args
+@return void
+**/
 public class Main {
 
 	public static void main(String[] args) {
