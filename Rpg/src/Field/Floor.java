@@ -287,6 +287,9 @@ public class Floor {
 		return false;
 	}
 
+	/**
+	 * Displays the floor
+	 */
 	public String toString() {
 		String str = "";
 		for (Containable[] line : grid) {
