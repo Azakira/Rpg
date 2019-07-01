@@ -35,6 +35,11 @@ public class Floor {
 	private Ground upLadderGround;
 	private Ground downLadderGround;
 
+	/**
+	 * Constructor: initializes a floor
+	 * @param game initializes the reference to game
+	 * @param nbFloor the floor number
+	 */
 	public Floor(Game game, int nbFloor) {
 		this.game = game;
 		this.nbFloor = nbFloor;
@@ -69,7 +74,10 @@ public class Floor {
 					if (i < WIDTH)
 						this.grid[j][i] = new Ground(i, j);
 	}
-
+	/**
+	 * Creates all the rooms in the grid, with a random size between lengthRoomMin and lengthRoomMax.
+	 * For each case in the grid, there is a 1/probRoom chance of generating a room there.
+	 */
 	public void createRooms() {
 		int prevI = 0;
 		int prevJ = 0;
@@ -86,6 +94,9 @@ public class Floor {
 		}
 	}
 
+	/**
+	 * Generates the up and down ladders on a random free ground
+	 */
 	public void createLadders() {
 		int x1;
 		int y1;
@@ -111,6 +122,13 @@ public class Floor {
 
 	}
 
+	/**
+	 * Fills the room that contains grid[y1][x1] with Marks.
+	 * 
+	 * Fills the Grounds around grid[y1][x1] with Mark instances and applies the same method to these Grounds.
+	 * @param x1 coordinate x
+	 * @param y1 coordinate y
+	 */
 	public void markRoom(int x1, int y1) {
 		if (this.grid[y1][x1] instanceof Ground)
 			grid[y1][x1] = new Mark(x1, y1);
@@ -138,6 +156,10 @@ public class Floor {
 
 	}
 
+	/**
+	 * Assigns each room a number by marking them 1 by 1 and giving a number to the marked area
+	 * 
+	 */
 	public void nameRooms() {
 		int nbRoom = 0;
 		this.rooms = new ArrayList<ArrayList<Dimension>>(0);
@@ -153,6 +175,10 @@ public class Floor {
 
 	}
 
+	/**
+	 * Assigns a number to each ground of the marked area
+	 * @param nbRoom the number you want the room to have
+	 */
 	public void nameRoom(int nbRoom) {
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < HEIGHT; j++) {
@@ -165,15 +191,22 @@ public class Floor {
 
 	}
 
+	/**
+	 * Puts the hero on a random Ground near the up ladder
+	 */
 	public void addHero() {
 		posHero = randNear(this.upLadderGround);
 		posHero.addOnGround(this.game.hero);
 	}
 
-
-	public Ground randNear(Ground c) {
-		int x = c.getCoordX();
-		int y = c.getCoordY();
+	/**
+	 * Returns a random Ground near the one given
+	 * @param g a Ground
+	 * @return a random Ground near g
+	 */
+	public Ground randNear(Ground g) {
+		int x = g.getCoordX();
+		int y = g.getCoordY();
 		while (true) {
 			int nbCase = (int) (Math.random() * 3);
 			switch (nbCase) {
@@ -195,11 +228,14 @@ public class Floor {
 			break;
 			default:
 				System.out.println("error randNear()");
-				return c;
+				return g;
 			}
 		}
 	}
-
+	
+	/**
+	 * Generates all the mobs on random places in the floor (except in the "spawn room", the one where the hero came from)
+	 */
 	public void generateMobs() {
 		int x, y;
 		for (int i = 0; i < 10 + nbFloor; i++) {
@@ -215,10 +251,16 @@ public class Floor {
 		}
 	}
 
+	/**
+	 * Generates a random mob (the higher the current floor level is, the higher are the chances to generate a high class mob)
+	 * @param level the mob's level
+	 * @param g the ground it's generated on
+	 * @return
+	 */
 	public Mob generateRandMob(int level, Ground g) {
 		Mob mob;
-		int nbMob = (int) (Math.random() * (nbFloor));// switch on "nbFloor" => 1 new monster per floor
-		switch (nbMob) {
+		int randMob = (int) (Math.random() * (nbFloor));// switch on "nbFloor" => 1 new monster class per floor
+		switch (randMob) {
 		case 0:
 			mob = new Rat(level, g);
 			break;
@@ -232,12 +274,23 @@ public class Floor {
 		return mob;
 	}
 	
+	/**
+	 * Returns true if grid[y][x] is in the same room as g
+	 * /!\ grid[y][x] MUST be a Ground
+	 * @param x coordinate x
+	 * @param y coordinate y
+	 * @param g a Ground
+	 * @return boolean
+	 */
 	public boolean sameRoom(int x, int y, Ground g) {
 		if((((Ground) grid[y][x]).getNbRoom())==g.getNbRoom())
 			return true;
 		return false;
 	}
 
+	/**
+	 * Displays the floor
+	 */
 	public String toString() {
 		String str = "";
 		for (Containable[] line : grid) {
