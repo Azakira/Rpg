@@ -61,6 +61,7 @@ public class Floor {
 	 * @param w room's width
 	 * @param h room's height
 	 */
+
 	public void createRoom(int x, int y, int w, int h) {
 		for (int i = x; i < x + w; i++)
 			for (int j = y; j < y + h; j++)
