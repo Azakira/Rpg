@@ -15,10 +15,6 @@ public abstract class OnGround {
 		return "OG?";
 	}
 	
-	public void moveTo(Ground g) {
-		this.ground = g;
-	}
-	
 	public int getCoordX() {
 		return ground.getCoordX();
 	}
@@ -27,7 +23,17 @@ public abstract class OnGround {
 		return ground.getCoordY();
 	}
 	
+	//without verification
 	public void setGround(Ground g) {
 		this.ground = g;
+	}
+	
+	public void moveTo(Ground newG) {
+		if(newG.isOccupied())
+			return;
+		newG.setOnGround(this);
+		this.ground = newG;
+		this.ground.free();
+			
 	}
 }

@@ -1,6 +1,9 @@
 package Field.Containables.Actors.Actions;
 
+import Field.Floor;
+import Field.Containables.Ground;
 import Field.Containables.Actors.Character;
+import Model.Game;
 
 public class Move extends Action {
 
@@ -14,14 +17,7 @@ public class Move extends Action {
 	}
 	
 	public void apply() {
-		switch(dir) {
-		case UP:
-			if(this.chtr.getCoordY()<=0)
-				return;
-			
-			this.chtr.setGround(g);;
-			//notifyFloor
-			break;
-		}
+		this.chtr.setGround(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),dir));
+		
 	}
 }

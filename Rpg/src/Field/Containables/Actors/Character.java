@@ -79,6 +79,10 @@ public class Character extends OnGround{
 	public void resetUntilTurn() {
 		this.untilTurn = TIME_PER_TURN;
 	}
+	
+	public Ground getGround() {
+		return this.ground;
+	}
 
 	private class Stats {
 

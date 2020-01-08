@@ -1,5 +1,6 @@
 package Field.Containables;
 
+import Field.Floor;
 import Field.Containables.Actors.OnGround;
 
 public class Ground extends Containable{
@@ -9,14 +10,14 @@ public class Ground extends Containable{
 	private OnGround onGround;
 	//ref to Character / loot
 
-	public Ground(int x, int y) {
-		super(x, y);
+	public Ground(int x, int y, Floor floor) {
+		super(x, y, floor);
 		this.nbRoom = -1;
 		this.occupied = false;
 	}
 	
-	public Ground(int x, int y, int nbRoom) {
-		super(x, y);
+	public Ground(int x, int y, Floor floor, int nbRoom) {
+		super(x, y, floor);
 		this.nbRoom = nbRoom;
 		this.occupied = false;
 	}
@@ -49,5 +50,15 @@ public class Ground extends Containable{
 	
 	public boolean isOccupied(){
 		return this.occupied;
+	}
+	
+	//public for OnGround
+	public void free() {
+		this.onGround = null;
+		this.occupied = false;
+	}
+	//without verification
+	public void setOnGround(OnGround oG) {
+		this.onGround = oG;
 	}
 }

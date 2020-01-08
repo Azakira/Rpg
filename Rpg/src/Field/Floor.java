@@ -9,6 +9,7 @@ import Field.Containables.Containable;
 import Field.Containables.Ground;
 import Field.Containables.Wall;
 import Field.Containables.Actors.Hero;
+import Field.Containables.Actors.Actions.Direction;
 import Field.Containables.Actors.Mobs.Mob;
 import Field.Containables.Actors.Mobs.Rat;
 import Field.Containables.Actors.Mobs.Slime;
@@ -43,19 +44,24 @@ public class Floor {
 	public Floor(Game game, int nbFloor) {
 		this.game = game;
 		this.nbFloor = nbFloor;
-		this.grid = new Containable[HEIGHT][WIDTH];
+		createGrid();
 		this.rooms = new ArrayList<ArrayList<Dimension>>(0);
-		for (int i = 0; i < HEIGHT; i++) {
-			for (int j = 0; j < WIDTH; j++) {
-				grid[i][j] = new Wall(i, j); // Init. grid with walls
-			}
-		}
 		createRooms();
 		nameRooms();
 		createLadders();
 		addHero();
 		generateMobs();
-
+	}
+	/**
+	 * Initializes the grid
+	 */
+	private void createGrid(){
+		this.grid = new Containable[HEIGHT][WIDTH];
+		for (int i = 0; i < HEIGHT; i++) {
+			for (int j = 0; j < WIDTH; j++) {
+				grid[i][j] = new Wall(i, j, this); // Init. grid with walls
+			}
+		}
 	}
 
 	/**
@@ -66,13 +72,12 @@ public class Floor {
 	 * @param w room's width
 	 * @param h room's height
 	 */
-
 	public void createRoom(int x, int y, int w, int h) {
 		for (int i = x; i < x + w; i++)
 			for (int j = y; j < y + h; j++)
 				if (j < HEIGHT)
 					if (i < WIDTH)
-						this.grid[j][i] = new Ground(i, j);
+						this.grid[j][i] = new Ground(i, j, this);
 	}
 	/**
 	 * Creates all the rooms in the grid, with a random size between lengthRoomMin and lengthRoomMax.
@@ -131,7 +136,7 @@ public class Floor {
 	 */
 	public void markRoom(int x1, int y1) {
 		if (this.grid[y1][x1] instanceof Ground)
-			grid[y1][x1] = new Mark(x1, y1);
+			grid[y1][x1] = new Mark(x1, y1, this);
 
 		if (y1 + 1 < HEIGHT) {
 			if (this.grid[y1 + 1][x1] instanceof Ground) {
@@ -183,7 +188,7 @@ public class Floor {
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < HEIGHT; j++) {
 				if (grid[j][i] instanceof Mark) {
-					grid[j][i] = new Ground(i, j, nbRoom);
+					grid[j][i] = new Ground(i, j, this, nbRoom);
 					this.rooms.get(nbRoom).add(new Dimension(i, j));
 				}
 			}
@@ -300,6 +305,32 @@ public class Floor {
 			str += "\n";
 		}
 		return str;
+	}
+
+	public Ground getNextGround(Ground g, Direction dir) {
+		switch(dir) {
+		case UP:
+			if (g.getCoordY()>0 && this.grid[g.getCoordY()-1][g.getCoordX()] instanceof Ground) {
+				return (Ground) this.grid[g.getCoordY()-1][g.getCoordX()];
+			}
+			break;
+		case DOWN:
+			if (g.getCoordY()>0 && this.grid[g.getCoordY()+1][g.getCoordX()] instanceof Ground) {
+				return (Ground) this.grid[g.getCoordY()+1][g.getCoordX()];
+			}
+			break;
+		case LEFT:
+			if (g.getCoordY()>0 && this.grid[g.getCoordY()][g.getCoordX()-1] instanceof Ground) {
+				return (Ground) this.grid[g.getCoordY()-1][g.getCoordX()-1];
+			}
+			break;
+		case RIGHT:
+			if (g.getCoordY()>0 && this.grid[g.getCoordY()][g.getCoordX()+1] instanceof Ground) {
+				return (Ground) this.grid[g.getCoordY()][g.getCoordX()+1];
+			}
+			break;
+		}
+		return g;
 	}
 
 }

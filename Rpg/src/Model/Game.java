@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import Field.Floor;
 import Field.Containables.Actors.Character;
 import Field.Containables.Actors.Hero;
+import Field.Containables.Actors.Actions.Direction;
+import Field.Containables.Actors.Actions.Move;
 
 public class Game {
 	
@@ -13,7 +15,7 @@ public class Game {
 	public Game() {
 		this.hero = new Hero("Kevin", 1, null);
 		this.floors = new ArrayList<Floor>(0);
-		this.currentFloor = 1;
+		this.currentFloor = 0;
 		this.floors.add(new Floor(this, currentFloor));
 		
 	}
@@ -21,6 +23,12 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = new Game();
 		System.out.println(game.floors.get(0));
+		Move move = new Move(game.hero, Direction.DOWN);
+		System.out.println(game.hero.getCoordX() + "," + game.hero.getCoordY());
+		move.apply();
+		System.out.println(game.hero.getCoordX() + "," + game.hero.getCoordY());
+		System.out.println(game.floors.get(0));
+		
 	}
 	
 	public int getCurrentFloor() {
