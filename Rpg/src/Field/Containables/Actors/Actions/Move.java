@@ -12,12 +12,23 @@ public class Move extends Action {
 //		// TODO Auto-generated constructor stub
 //	}
 	
-	public Move(Character chtr, Direction dir) {
-		super(chtr, dir);
+	public Move(Character chtr) {
+		super(chtr);
 	}
 	
-	public void apply() {
-		this.chtr.setGround(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),dir));
-		
+	public void up() {
+		this.chtr.moveTo(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),Direction.UP));
+	}
+	
+	public void down() {
+		this.chtr.moveTo(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),Direction.DOWN));
+	}
+	
+	public void left() {
+		this.chtr.moveTo(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),Direction.LEFT));
+	}
+	
+	public void right() {
+		this.chtr.moveTo(this.chtr.getGround().getFloor().getNextGround(this.chtr.getGround(),Direction.RIGHT));
 	}
 }

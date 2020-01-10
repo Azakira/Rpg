@@ -18,18 +18,18 @@ import Model.Game;
 
 public class Floor {
 
-	public static final int WIDTH = 30; // Grid's width
-	public static final int HEIGHT = 30; // Grid's height
+	public static final int WIDTH = 30; // Grid's width (30)
+	public static final int HEIGHT = 30; // Grid's height (30)
 
-	public static final int lengthRoomMin = 2;
-	public static final int lengthRoomMax = 6;
+	public static final int lengthRoomMin = 2; //2
+	public static final int lengthRoomMax = 6; //6
 
 	public static final int probRoom = 20; // Probability for creating a room per block (= 1/probRoom)
 
 	private Game game;
 	private Ground posHero;
 	private int nbFloor;
-	private Containable[][] grid;
+	public Containable[][] grid; //TODO: make it private after testing done
 	private ArrayList<ArrayList<Dimension>> rooms; // Contains a list of rooms that each contains a list of the
 													// coordinates of the rooms' elements
 	private ArrayList<Character> turn;
@@ -310,27 +310,32 @@ public class Floor {
 	public Ground getNextGround(Ground g, Direction dir) {
 		switch(dir) {
 		case UP:
-			if (g.getCoordY()>0 && this.grid[g.getCoordY()-1][g.getCoordX()] instanceof Ground) {
+			if (g.getCoordY()-1 >= 0 && this.grid[g.getCoordY()-1][g.getCoordX()] instanceof Ground) {
 				return (Ground) this.grid[g.getCoordY()-1][g.getCoordX()];
 			}
 			break;
 		case DOWN:
-			if (g.getCoordY()>0 && this.grid[g.getCoordY()+1][g.getCoordX()] instanceof Ground) {
+			if (g.getCoordY()+1 < HEIGHT && this.grid[g.getCoordY()+1][g.getCoordX()] instanceof Ground) {
 				return (Ground) this.grid[g.getCoordY()+1][g.getCoordX()];
 			}
 			break;
 		case LEFT:
-			if (g.getCoordY()>0 && this.grid[g.getCoordY()][g.getCoordX()-1] instanceof Ground) {
-				return (Ground) this.grid[g.getCoordY()-1][g.getCoordX()-1];
+			if (g.getCoordX()-1 >= 0 && this.grid[g.getCoordY()][g.getCoordX()-1] instanceof Ground) {
+				return (Ground) this.grid[g.getCoordY()][g.getCoordX()-1];
 			}
 			break;
 		case RIGHT:
-			if (g.getCoordY()>0 && this.grid[g.getCoordY()][g.getCoordX()+1] instanceof Ground) {
+			if (g.getCoordX()+1 < WIDTH && this.grid[g.getCoordY()][g.getCoordX()+1] instanceof Ground) {
 				return (Ground) this.grid[g.getCoordY()][g.getCoordX()+1];
 			}
 			break;
 		}
 		return g;
+	}
+	
+	public void setGrid(Containable c) {
+		if (c.getCoordY()>=0 && c.getCoordY()<HEIGHT && c.getCoordX()>=0 && c.getCoordX()<WIDTH)
+			this.grid[c.getCoordY()][c.getCoordX()] = c;
 	}
 
 }

@@ -31,9 +31,10 @@ public abstract class OnGround {
 	public void moveTo(Ground newG) {
 		if(newG.isOccupied())
 			return;
+		this.ground.free();
 		newG.setOnGround(this);
 		this.ground = newG;
-		this.ground.free();
+		this.ground.getFloor().setGrid(newG);
 			
 	}
 }

@@ -22,11 +22,7 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		System.out.println(game.floors.get(0));
-		Move move = new Move(game.hero, Direction.DOWN);
-		System.out.println(game.hero.getCoordX() + "," + game.hero.getCoordY());
-		move.apply();
-		System.out.println(game.hero.getCoordX() + "," + game.hero.getCoordY());
+		game.hero.moveUp();
 		System.out.println(game.floors.get(0));
 		
 	}

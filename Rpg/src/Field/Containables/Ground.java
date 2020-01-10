@@ -32,6 +32,7 @@ public class Ground extends Containable{
 		this.onGround = oG;
 		oG.setGround(this);
 		this.occupied = true;
+		this.getFloor().setGrid(this);
 		return true;
 	}
 	
@@ -60,5 +61,6 @@ public class Ground extends Containable{
 	//without verification
 	public void setOnGround(OnGround oG) {
 		this.onGround = oG;
+		this.occupied = true;
 	}
 }

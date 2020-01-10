@@ -3,6 +3,7 @@ package Field.Containables.Actors;
 import java.util.ArrayList;
 
 import Field.Containables.Ground;
+import Field.Containables.Actors.Actions.Move;
 
 public class Hero extends Character {
 
@@ -20,6 +21,6 @@ public class Hero extends Character {
 	
 	
 	public String toString() {
-		return "YOU";
+		return " 😀 ";
 	}
 }

@@ -1,7 +1,10 @@
 package Field.Containables.Actors;
 
+import java.util.ArrayList;
+
 import Field.Containables.Ground;
 import Field.Containables.Actors.Actions.Action;
+import Field.Containables.Actors.Actions.Move;
 
 public class Character extends OnGround{
 	
@@ -10,12 +13,14 @@ public class Character extends OnGround{
 	protected Stats stats;
 	protected String name;
 	private int untilTurn;
+	private Move move;
 
 	public Character(Ground g) {
 		super(g);
 		name = "???";
 		stats = new Stats();
 		untilTurn = TIME_PER_TURN;
+		move = new Move(this);
 	}
 
 	public Character(String name, int level, Ground g) {
@@ -23,6 +28,7 @@ public class Character extends OnGround{
 		this.name = name;
 		this.stats = new Stats(level);
 		untilTurn = TIME_PER_TURN;
+		move = new Move(this);
 	}
 	
 	public void turnPass() {
@@ -34,6 +40,18 @@ public class Character extends OnGround{
 		this.untilTurn = TIME_PER_TURN;
 	}
 	
+	public void moveUp() {
+		this.move.up();
+	}
+	public void moveDown() {
+		this.move.down();
+	}
+	public void moveLeft() {
+		this.move.left();
+	}
+	public void moveRight() {
+		this.move.right();
+	}
 	
 	@Override
 	public String toString() {
