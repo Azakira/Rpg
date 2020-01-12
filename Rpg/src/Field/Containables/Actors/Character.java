@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Field.Containables.Ground;
 import Field.Containables.Actors.Actions.Action;
+import Field.Containables.Actors.Actions.Direction;
 import Field.Containables.Actors.Actions.Move;
 
 public class Character extends OnGround{
@@ -12,6 +13,7 @@ public class Character extends OnGround{
 
 	protected Stats stats;
 	protected String name;
+	protected Direction facing;
 	private int untilTurn;
 	private Move move;
 
@@ -21,6 +23,7 @@ public class Character extends OnGround{
 		stats = new Stats();
 		untilTurn = TIME_PER_TURN;
 		move = new Move(this);
+		facing = Direction.DOWN;
 	}
 
 	public Character(String name, int level, Ground g) {
@@ -29,6 +32,7 @@ public class Character extends OnGround{
 		this.stats = new Stats(level);
 		untilTurn = TIME_PER_TURN;
 		move = new Move(this);
+		facing = Direction.DOWN;
 	}
 	
 	public void turnPass() {
@@ -51,6 +55,14 @@ public class Character extends OnGround{
 	}
 	public void moveRight() {
 		this.move.right();
+	}
+	
+	public Direction getFacing() {
+		return this.facing;
+	}
+	
+	public void setFacing(Direction dir) {
+		this.facing = dir;
 	}
 	
 	@Override
