@@ -8,6 +8,11 @@ public class Wall extends Containable{
 		super(x, y, floor);
 	}
 	
+	public boolean isNull() {
+		if (this.getCoordX()==-1 && this.getCoordY()==-1)
+			return true;
+		return false;
+	}
 	@Override
 	public String toString() {
 		return "███";

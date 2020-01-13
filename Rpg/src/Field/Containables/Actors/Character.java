@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Field.Containables.Ground;
 import Field.Containables.Actors.Actions.Action;
 import Field.Containables.Actors.Actions.Direction;
+import Field.Containables.Actors.Actions.Mine;
 import Field.Containables.Actors.Actions.Move;
 
 public class Character extends OnGround{
@@ -16,6 +17,7 @@ public class Character extends OnGround{
 	protected Direction facing;
 	private int untilTurn;
 	private Move move;
+	private Mine mine;
 
 	public Character(Ground g) {
 		super(g);
@@ -55,6 +57,10 @@ public class Character extends OnGround{
 	}
 	public void moveRight() {
 		this.move.right();
+	}
+	
+	public void mine() {
+		this.mine.mine();
 	}
 	
 	public Direction getFacing() {

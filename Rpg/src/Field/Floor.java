@@ -8,6 +8,7 @@ import Field.Containables.Mark;
 import Field.Containables.Containable;
 import Field.Containables.Ground;
 import Field.Containables.Wall;
+import Field.Containables.Actors.Character;
 import Field.Containables.Actors.Hero;
 import Field.Containables.Actors.Actions.Direction;
 import Field.Containables.Actors.Mobs.Mob;
@@ -331,6 +332,37 @@ public class Floor {
 			break;
 		}
 		return g;
+	}
+	
+	public Wall getNextWall(Ground g, Direction dir) {
+		switch(dir) {
+		case UP:
+			if (g.getCoordY()-1 >= 0 && this.grid[g.getCoordY()-1][g.getCoordX()] instanceof Wall) {
+				return (Wall) this.grid[g.getCoordY()-1][g.getCoordX()];
+			}
+			break;
+		case DOWN:
+			if (g.getCoordY()+1 < HEIGHT && this.grid[g.getCoordY()+1][g.getCoordX()] instanceof Wall) {
+				return (Wall) this.grid[g.getCoordY()+1][g.getCoordX()];
+			}
+			break;
+		case LEFT:
+			if (g.getCoordX()-1 >= 0 && this.grid[g.getCoordY()][g.getCoordX()-1] instanceof Wall) {
+				return (Wall) this.grid[g.getCoordY()][g.getCoordX()-1];
+			}
+			break;
+		case RIGHT:
+			if (g.getCoordX()+1 < WIDTH && this.grid[g.getCoordY()][g.getCoordX()+1] instanceof Wall) {
+				return (Wall) this.grid[g.getCoordY()][g.getCoordX()+1];
+			}
+			break;
+		}
+		return new Wall(-1,-1, this);
+	}
+	
+	public void mineWall(Wall w) {
+		if (w.getCoordY()>=0 && w.getCoordY()<HEIGHT && w.getCoordX()>=0 && w.getCoordX()<WIDTH)
+			this.grid[w.getCoordY()][w.getCoordX()] = new Ground(w.getCoordX(), w.getCoordY(), this);
 	}
 	
 	public void setGrid(Containable c) {

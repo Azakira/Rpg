@@ -23,6 +23,7 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.hero.moveUp();
+		game.hero.mine();
 		System.out.println(game.floors.get(0));
 		
 	}
