@@ -40,6 +40,8 @@ public class Ground extends Containable{
 	public String toString() {
 		if (occupied)
 			return onGround.toString();
+		if (nbRoom==-1)
+			return "[ ]";
 		if (nbRoom<10)
 			return "["+nbRoom+"]";
 		return "["+nbRoom;

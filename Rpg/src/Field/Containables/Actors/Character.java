@@ -26,6 +26,7 @@ public class Character extends OnGround{
 		untilTurn = TIME_PER_TURN;
 		move = new Move(this);
 		facing = Direction.DOWN;
+		mine = new Mine(this);
 	}
 
 	public Character(String name, int level, Ground g) {
@@ -35,6 +36,7 @@ public class Character extends OnGround{
 		untilTurn = TIME_PER_TURN;
 		move = new Move(this);
 		facing = Direction.DOWN;
+		mine = new Mine(this);
 	}
 	
 	public void turnPass() {

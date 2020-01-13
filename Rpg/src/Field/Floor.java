@@ -335,25 +335,27 @@ public class Floor {
 	}
 	
 	public Wall getNextWall(Ground g, Direction dir) {
+		int gX = g.getCoordX();
+		int gY = g.getCoordY();
 		switch(dir) {
 		case UP:
-			if (g.getCoordY()-1 >= 0 && this.grid[g.getCoordY()-1][g.getCoordX()] instanceof Wall) {
-				return (Wall) this.grid[g.getCoordY()-1][g.getCoordX()];
+			if (gY-1 >= 0 && this.grid[gY-1][gX] instanceof Wall) {
+				return (Wall) this.grid[gY-1][gX];
 			}
 			break;
 		case DOWN:
-			if (g.getCoordY()+1 < HEIGHT && this.grid[g.getCoordY()+1][g.getCoordX()] instanceof Wall) {
-				return (Wall) this.grid[g.getCoordY()+1][g.getCoordX()];
+			if (gY+1 < HEIGHT && this.grid[gY+1][gX] instanceof Wall) {
+				return (Wall) this.grid[gY+1][gX];
 			}
 			break;
 		case LEFT:
-			if (g.getCoordX()-1 >= 0 && this.grid[g.getCoordY()][g.getCoordX()-1] instanceof Wall) {
-				return (Wall) this.grid[g.getCoordY()][g.getCoordX()-1];
+			if (gX-1 >= 0 && this.grid[gY][gX-1] instanceof Wall) {
+				return (Wall) this.grid[gY][gX-1];
 			}
 			break;
 		case RIGHT:
-			if (g.getCoordX()+1 < WIDTH && this.grid[g.getCoordY()][g.getCoordX()+1] instanceof Wall) {
-				return (Wall) this.grid[g.getCoordY()][g.getCoordX()+1];
+			if (gX+1 < WIDTH && this.grid[gY][gX+1] instanceof Wall) {
+				return (Wall) this.grid[gY][gX+1];
 			}
 			break;
 		}
@@ -361,13 +363,15 @@ public class Floor {
 	}
 	
 	public void mineWall(Wall w) {
-		if (w.getCoordY()>=0 && w.getCoordY()<HEIGHT && w.getCoordX()>=0 && w.getCoordX()<WIDTH)
-			this.grid[w.getCoordY()][w.getCoordX()] = new Ground(w.getCoordX(), w.getCoordY(), this);
+		System.out.println("minewall:");
+		setGrid(new Ground(w.getCoordY(), w.getCoordX(), this)); //Swapped X and Y cuz i suck at coding: Ground's X are Grid's Y...
 	}
 	
 	public void setGrid(Containable c) {
-		if (c.getCoordY()>=0 && c.getCoordY()<HEIGHT && c.getCoordX()>=0 && c.getCoordX()<WIDTH)
+		if (c.getCoordY()>=0 && c.getCoordY()<HEIGHT && c.getCoordX()>=0 && c.getCoordX()<WIDTH) {
+			System.out.println(c.getCoordX()+", "+c.getCoordY());
 			this.grid[c.getCoordY()][c.getCoordX()] = c;
+		}
 	}
 
 }

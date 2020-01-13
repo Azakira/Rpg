@@ -22,8 +22,17 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.hero.moveUp();
+		game.hero.moveDown();
+		game.hero.moveDown();
+		game.hero.moveDown();
+		game.hero.moveDown();
+		game.hero.moveDown();
 		game.hero.mine();
+		game.hero.moveDown();
+		game.hero.mine();
+		game.hero.moveDown();
+		game.hero.mine();
+		game.hero.moveDown();
 		System.out.println(game.floors.get(0));
 		
 	}
