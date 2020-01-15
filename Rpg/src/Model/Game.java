@@ -8,7 +8,7 @@ import Field.Containables.Actors.Actions.Move;
 
 public class Game {
 	
-	private ArrayList<Floor> floors;
+	public ArrayList<Floor> floors;
 	private int currentFloor;
 	public Hero hero;
 	
