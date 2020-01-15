@@ -30,7 +30,7 @@ public class Floor {
 	private Game game;
 	private Ground posHero;
 	private int nbFloor;
-	public Containable[][] grid; //TODO: make it private after testing done
+	private Containable[][] grid;
 	private ArrayList<ArrayList<Dimension>> rooms; // Contains a list of rooms that each contains a list of the
 													// coordinates of the rooms' elements
 	private ArrayList<Character> turn;
@@ -363,13 +363,15 @@ public class Floor {
 	}
 	
 	public void mineWall(Wall w) {
-		System.out.println("minewall:");
 		setGrid(new Ground(w.getCoordY(), w.getCoordX(), this)); //Swapped X and Y cuz i suck at coding: Ground's X are Grid's Y...
+	}
+	
+	public Containable getGrid(int x, int y) {
+		return this.grid[y][x];
 	}
 	
 	public void setGrid(Containable c) {
 		if (c.getCoordY()>=0 && c.getCoordY()<HEIGHT && c.getCoordX()>=0 && c.getCoordX()<WIDTH) {
-			System.out.println(c.getCoordX()+", "+c.getCoordY());
 			this.grid[c.getCoordY()][c.getCoordX()] = c;
 		}
 	}
