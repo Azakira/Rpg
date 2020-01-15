@@ -19,6 +19,17 @@ public class Main {
 			
 			Game game = new Game();
 			View view = new View(game);
+			game.hero.moveDown();
+			game.hero.moveDown();
+			game.hero.moveDown();
+			game.hero.moveDown();
+			game.hero.moveDown();
+			game.hero.mine();
+			game.hero.moveDown();
+			game.hero.mine();
+			game.hero.moveDown();
+			game.hero.mine();
+			game.hero.moveDown();
 		});
 	}
 	
