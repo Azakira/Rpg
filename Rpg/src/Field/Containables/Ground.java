@@ -65,4 +65,9 @@ public class Ground extends Containable{
 		this.onGround = oG;
 		this.occupied = true;
 	}
+	
+	//Doesn't verifies if the ground is occupied or not, may return null
+	public OnGround getOnGround() {
+		return this.onGround;
+	}
 }
