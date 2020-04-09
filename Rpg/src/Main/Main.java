@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,12 +14,20 @@ import View.View;
 @return void
 **/
 public class Main {
+	
+	private static void wait(int sec) {
+		try {
+			TimeUnit.SECONDS.sleep(sec);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			
 			Game game = new Game();
-			View view = new View(game);
+			wait(1);
 			game.hero.moveDown();
 			game.hero.moveDown();
 			game.hero.moveDown();
