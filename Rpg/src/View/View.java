@@ -16,10 +16,11 @@ public class View {
 	
     private JFrame frame;
 
-    private ViewGame vGame;
+    public ViewGame vGame; //TODO: make it private after testing
     
    
     public View(Game game) {
+    	game.view = this;
     	frame = new JFrame();
     	frame.setTitle("Rpg");
 //		frame.setLayout(new BorderLayout());
