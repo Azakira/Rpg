@@ -12,8 +12,12 @@ import Model.Game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Observable;
+import java.util.Observer;
  
-public class ViewGame extends JPanel{
+public class ViewGame extends JPanel implements Observer, KeyListener{
 
 	
 	public static final int size = 20;
@@ -31,7 +35,10 @@ public class ViewGame extends JPanel{
   @Override
   public void paintComponent(Graphics g) {
 	  super.paintComponent(g);
-	  Floor floor = this.game.floors.get(game.getCurrentFloor());
+	  if (this.game.readyToDisplay == false) {
+		  return;
+	  }
+	  Floor floor = this.game.getCurrentFloor();
 	  for(int i = 0; i<floor.HEIGHT; i++) {
 		  for(int j = 0; j<floor.WIDTH; j++) {
 			  
@@ -83,6 +90,52 @@ public class ViewGame extends JPanel{
 		  }
 	  }
   }
+  
+
+	@Override
+	public void keyPressed(KeyEvent key) {
+		int codeDeLaTouche = key.getKeyCode();
+       
+      switch (codeDeLaTouche) // Les valeurs sont contenue dans KeyEvent. Elles commencent par VK_ et finissent par le nom de la touche
+      {
+          case KeyEvent.VK_UP: // si la touche enfoncée est celle du haut
+              game.hero.moveUp();
+              break;
+          case KeyEvent.VK_LEFT: // si la touche enfoncée est celle de gauche
+          	game.hero.moveLeft();
+              break;
+          case KeyEvent.VK_RIGHT: // si la touche enfoncée est celle de droite
+          	game.hero.moveRight();
+              break;
+          case KeyEvent.VK_DOWN: // si la touche enfoncée est celle du bas
+          	game.hero.moveDown();
+              break;
+      }
+		
+	}
+  
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+  @Override
+  public void update(Observable arg0, Object arg1) {
+	  this.repaint();
+  }
+
+
+
+	
 }
+  
+
     
     
