@@ -15,6 +15,7 @@ public class Mine extends Action{
 			return;
 		}
 		this.chtr.getGround().getFloor().mineWall(w);
+		this.chtr.getGround().getFloor().changedNotify();
 	}
 
 }
