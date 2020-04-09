@@ -16,8 +16,10 @@ import Field.Containables.Actors.Mobs.Rat;
 import Field.Containables.Actors.Mobs.Slime;
 import Field.Containables.Actors.Mobs.Unknown;
 import Model.Game;
+import java.util.Observable;
 
-public class Floor {
+public class Floor extends Observable {
+	
 
 	public static final int WIDTH = 30; // Grid's width (30)
 	public static final int HEIGHT = 30; // Grid's height (30)
@@ -43,6 +45,9 @@ public class Floor {
 	 * @param nbFloor the floor number
 	 */
 	public Floor(Game game, int nbFloor) {
+		super();
+		//Observable init
+		this.addObserver(game.getViewG());
 		this.game = game;
 		this.nbFloor = nbFloor;
 		createGrid();
@@ -52,6 +57,7 @@ public class Floor {
 		createLadders();
 		addHero();
 		generateMobs();
+		changedNotify();
 	}
 	/**
 	 * Initializes the grid
@@ -374,6 +380,11 @@ public class Floor {
 		if (c.getCoordY()>=0 && c.getCoordY()<HEIGHT && c.getCoordX()>=0 && c.getCoordX()<WIDTH) {
 			this.grid[c.getCoordY()][c.getCoordX()] = c;
 		}
+	}
+	
+	public void changedNotify() {
+		this.setChanged(); //always put this after a change you want to be displayed
+		this.notifyObservers();
 	}
 
 }
