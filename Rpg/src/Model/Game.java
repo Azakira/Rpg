@@ -33,28 +33,6 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.mine();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.mine();
-		wait(1);
-		game.hero.moveDown();
-		wait(1);
-		game.hero.mine();
-		wait(1);
-		game.hero.moveDown();
 		//System.out.println(game.floors.get(0));
 		
 	}
