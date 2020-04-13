@@ -17,7 +17,7 @@ import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
  
-public class ViewGame extends JPanel implements Observer, KeyListener{
+public class ViewGame extends JPanel implements Observer{
 
 	
 	public static final int size = 20;
@@ -90,41 +90,7 @@ public class ViewGame extends JPanel implements Observer, KeyListener{
 		  }
 	  }
   }
-  
 
-	@Override
-	public void keyPressed(KeyEvent key) {
-		int codeDeLaTouche = key.getKeyCode();
-       
-      switch (codeDeLaTouche) // Les valeurs sont contenue dans KeyEvent. Elles commencent par VK_ et finissent par le nom de la touche
-      {
-          case KeyEvent.VK_UP: // si la touche enfoncée est celle du haut
-              game.hero.moveUp();
-              break;
-          case KeyEvent.VK_LEFT: // si la touche enfoncée est celle de gauche
-          	game.hero.moveLeft();
-              break;
-          case KeyEvent.VK_RIGHT: // si la touche enfoncée est celle de droite
-          	game.hero.moveRight();
-              break;
-          case KeyEvent.VK_DOWN: // si la touche enfoncée est celle du bas
-          	game.hero.moveDown();
-              break;
-      }
-		
-	}
-  
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
 
   @Override
   public void update(Observable arg0, Object arg1) {

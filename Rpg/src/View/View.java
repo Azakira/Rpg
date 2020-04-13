@@ -8,30 +8,73 @@ import Field.Floor;
 import Model.Game;
 
 
-public class View {
+public class View extends JFrame implements KeyListener {
 	
 	public final int WIDTH = (ViewGame.size+3)*Floor.WIDTH;
 	public final int HEIGHT = (ViewGame.size+4)*Floor.HEIGHT;
 	//public final static String path = "D:\\Linux\\POGL\\Coltexpress\\src\\game\\Images\\";
-	
-    private JFrame frame;
+	public Game game;
+
 
     public ViewGame vGame; //TODO: make it private after testing
     
    
     public View(Game game) {
+    	this.game = game;
     	game.view = this;
-    	frame = new JFrame();
-    	frame.setTitle("Rpg");
+    	this.setTitle("Rpg");
 //		frame.setLayout(new BorderLayout());
-    	frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    	this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		vGame = new ViewGame(game);
-		frame.add(vGame); //frame.add(vGame, BorderLayout.WEST);
+		this.add(vGame); //frame.add(vGame, BorderLayout.WEST);
 		
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		this.pack();
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		
+		addKeyListener(this);
+		requestFocusInWindow();
     }
+
+
+	@Override
+	public void keyPressed(KeyEvent key) {
+		int codeDeLaTouche = key.getKeyCode();
+       
+		switch (codeDeLaTouche) // Les valeurs sont contenue dans KeyEvent. Elles commencent par VK_ et finissent par le nom de la touche
+		{
+          case KeyEvent.VK_UP: 
+              game.hero.moveUp();
+              break;
+          case KeyEvent.VK_LEFT:
+          	game.hero.moveLeft();
+              break;
+          case KeyEvent.VK_RIGHT: 
+          	game.hero.moveRight();
+              break;
+          case KeyEvent.VK_DOWN:
+          	game.hero.moveDown();
+              break;
+          case KeyEvent.VK_SPACE:
+        	game.hero.mine();
+        	  break;
+        
+      }
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
