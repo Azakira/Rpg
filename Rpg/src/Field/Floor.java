@@ -126,7 +126,7 @@ public class Floor extends Observable {
 				y2 = (int) (Math.random() * HEIGHT);
 			} while (!(this.grid[y2][x2] instanceof Ground));
 			cpt++;
-		} while (((Ground) this.grid[y2][x2]).getNbRoom() == ((Ground) this.grid[y1][x1]).getNbRoom() && cpt < 10);
+		} while (((Ground) this.grid[y2][x2]).getNbRoom() == ((Ground) this.grid[y1][x1]).getNbRoom() && cpt < 10);//some optimisation to be done
 		((Ground) this.grid[y1][x1]).addOnGround(new Ladder((Ground) this.grid[y1][x1], true));
 		((Ground) this.grid[y2][x2]).addOnGround(new Ladder((Ground) this.grid[y2][x2], false));
 		this.downLadderGround = (Ground) this.grid[y1][x1];
