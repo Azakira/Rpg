@@ -24,7 +24,7 @@ public class Floor extends Observable {
 	public static final int WIDTH = 30; // Grid's width (30)
 	public static final int HEIGHT = 30; // Grid's height (30)
 
-	public static final int lengthRoomMin = 2; //2
+	public static final int lengthRoomMin = 2; //2 wht is a room ? one or multiple white grids ?
 	public static final int lengthRoomMax = 6; //6
 
 	public static final int probRoom = 20; // Probability for creating a room per block (= 1/probRoom)
@@ -119,14 +119,15 @@ public class Floor extends Observable {
 		do {
 			x1 = (int) (Math.random() * WIDTH);
 			y1 = (int) (Math.random() * HEIGHT);
-		} while (!(this.grid[y1][x1] instanceof Ground));
+		} while (!(this.grid[y1][x1] instanceof Ground)); 
 		do {
 			do {
 				x2 = (int) (Math.random() * WIDTH);
 				y2 = (int) (Math.random() * HEIGHT);
-			} while (!(this.grid[y2][x2] instanceof Ground));
+			} while (!(this.grid[y2][x2] instanceof Ground)); //testing (x1,y1) =! (x2,y2) here would in my opinion avoid the double while loop 
 			cpt++;
 		} while (((Ground) this.grid[y2][x2]).getNbRoom() == ((Ground) this.grid[y1][x1]).getNbRoom() && cpt < 10);
+		//wht happen for (x2,y2) if, in the above cinditions the 1st one is tree and cpt>11 ? 
 		((Ground) this.grid[y1][x1]).addOnGround(new Ladder((Ground) this.grid[y1][x1], true));
 		((Ground) this.grid[y2][x2]).addOnGround(new Ladder((Ground) this.grid[y2][x2], false));
 		this.downLadderGround = (Ground) this.grid[y1][x1];

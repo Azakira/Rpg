@@ -2,7 +2,6 @@ package Model;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import org.omg.CORBA.Current;
 
 import Field.Floor;
 import Field.Containables.Actors.Character;
